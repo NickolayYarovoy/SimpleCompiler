@@ -169,6 +169,9 @@ bool compiler::parser::statement(std::vector<token>& tokens, int& count, compile
 			return false;
 		break;
 
+		if (!parsed)
+			return false;
+
 	default:
 		node->type = nodeTypes::EXPR;
 		parsed = compiler::parser::expr(tokens, count, node->op1);
@@ -284,6 +287,7 @@ bool compiler::parser::arExpr(std::vector<token>& tokens, int& count, compiler::
 bool compiler::parser::term(std::vector<token>& tokens, int& count, compiler::node*& node)
 {
 	delete node;
+	bool parsed;
 	switch(tokens[count].type)
 	{
 	case tokensTypes::VAR:
@@ -295,6 +299,13 @@ bool compiler::parser::term(std::vector<token>& tokens, int& count, compiler::no
 		node = new compiler::node(nodeTypes::CONST, tokens[count].value);
 		count++;
 		break;
+
+	case compiler::tokensTypes::LPAR:
+		parsed = compiler::parser::parenExpr(tokens, count, node);
+		if (parsed = false)
+			return false;
+		break;
+
 	default:
 		bool res = parenExpr(tokens, count, node);
 
