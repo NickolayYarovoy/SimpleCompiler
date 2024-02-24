@@ -59,7 +59,7 @@ private:
     {
     public:
         tokensTypes type;
-        int value;
+        unsigned short value;
         char variable;
 
         token(tokensTypes type, int value = 0, char variable = 'a');

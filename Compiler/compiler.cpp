@@ -373,7 +373,7 @@ compiler::token compiler::getNexttoken()
 	if (str.size() == 1 && str[0] >= 'a' && str[0] <= 'z')
 		return  token(tokensTypes::VAR, 0, str[0]);
 
-	int value = 0;
+	unsigned short value = 0;
 	for (int i = 0; i < str.size(); i++)
 	{
 		if (isdigit(str[i]))
