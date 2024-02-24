@@ -300,12 +300,6 @@ bool compiler::parser::term(std::vector<token>& tokens, int& count, compiler::no
 		count++;
 		break;
 
-	case compiler::tokensTypes::LPAR:
-		parsed = compiler::parser::parenExpr(tokens, count, node);
-		if (parsed = false)
-			return false;
-		break;
-
 	default:
 		bool res = parenExpr(tokens, count, node);
 
